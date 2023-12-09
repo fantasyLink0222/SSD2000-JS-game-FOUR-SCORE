@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to handle cell click
   const cellClicked = (index) => {
       // Add logic to handle the cell click
+      const row = findLowestEmptyCell(col);
+      if (row !== -1) {
+          gameState[row][col] = currentPlayer;
+          updateCell(row, col);
+          if (checkWin(row, col)) {
+              alert(`Player ${currentPlayer} wins!`);
+              // Reset game or handle win condition here
+          }
+          currentPlayer = currentPlayer === 1 ? 2 : 1;
+      }
       // For now, just toggling the player color
       let cell = board.children[index];
       cell.classList.add(currentPlayer === 1 ? 'player1' : 'player2');
